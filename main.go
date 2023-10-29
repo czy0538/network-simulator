@@ -10,6 +10,8 @@ import (
 	"flag"
 	"gitee.com/czy_hit/softbus-go/net/tun"
 	"gitee.com/czy_hit/softbus-go/util/iptool"
+	"github.com/gookit/config/v2"
+	"github.com/gookit/config/v2/yamlv3"
 	"github.com/quic-go/quic-go"
 	"log/slog"
 	"math/big"
@@ -72,6 +74,19 @@ var tunName = []string{"mptest-1", "mptest-2"}
 var tunIPPrefix string
 var tunIfaceNum = 2
 var tunInterface []*TunDevice
+
+func init() {
+	config.WithOptions(config.ParseEnv)
+	config.AddDriver(yamlv3.Driver)
+	err := config.LoadFiles("config_example.yaml")
+	if err != nil {
+		panic(err)
+	}
+	ipt := config.StringMap("map1")
+	for k, v := range ipt {
+		iptable.Add(net.ParseIP(k), net.ParseIP(v))
+	}
+}
 
 func main() {
 	flag.StringVar(&tunIPPrefix, "prefix", "10.0.0.", "tun ip prefix")

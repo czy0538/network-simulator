@@ -1,4 +1,4 @@
-module network-simulator
+module github.com/czy0538/network-simulator
 
 go 1.21.0
 
@@ -8,7 +8,6 @@ require (
 	gitee.com/czy_hit/softbus-go v0.0.0-20230906080439-9b0bea146b9e
 	github.com/gookit/config/v2 v2.2.4
 	github.com/quic-go/quic-go v0.39.3
-	github.com/tommy-muehle/go-mnd/v2 v2.5.1
 )
 
 require (

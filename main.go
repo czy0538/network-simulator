@@ -1,4 +1,4 @@
-package network_simulator
+package main
 
 import (
 	"context"
